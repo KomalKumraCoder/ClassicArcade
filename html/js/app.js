@@ -1,20 +1,20 @@
-// Enemies our player must avoid
-var Enemy = function(x, y, speed) {
+var EnemyDushman = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
 };
+EnemyDushman.prototype.update = function(KT) {
+   
+    this.x += this.speed * KT;
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    this.x += this.speed * dt;
-
+   
     if (this.x > 550) {
         this.x = -100;
         this.speed = 100 + Math.floor(Math.random() * 512);
     }
+
+    
     if (player.x < this.x + 60 &&
         player.x + 37 > this.x &&
         player.y < this.y + 25 &&
@@ -23,11 +23,11 @@ Enemy.prototype.update = function(dt) {
         player.y = 380;
     }
 };
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+EnemyDushman.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+
 var Player = function(x, y, speed) {
     this.x = x;
     this.y = y;
@@ -36,7 +36,6 @@ var Player = function(x, y, speed) {
 };
 
 Player.prototype.update = function() {
-    // Prevent player from moving beyond canvas wall boundaries
     if (this.y > 380) {
         this.y = 380;
     }
@@ -48,8 +47,6 @@ Player.prototype.update = function() {
     if (this.x < 0) {
         this.x = 0;
     }
-
-    // Check for player reaching top of canvas and winning the game
     if (this.y < 0) {
         this.x = 200;
         this.y = 380;
@@ -76,15 +73,19 @@ Player.prototype.handleInput = function(keyPress) {
             break;
     }
 };
+
 var allEnemies = [];
+
+
 var enemyPosition = [60, 140, 220];
 var player = new Player(200, 380, 50);
 var enemy;
 
 enemyPosition.forEach(function(posY) {
-    enemy = new Enemy(0, posY, 100 + Math.floor(Math.random() * 512));
+    enemy = new EnemyDushman(0, posY, 100 + Math.floor(Math.random() * 512));
     allEnemies.push(enemy);
 });
+
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
