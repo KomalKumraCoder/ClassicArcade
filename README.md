@@ -10,4 +10,12 @@ Once the player reaches the water (i.e., the top of the game board), the game is
 How to run the game locally? 
 open index.html in a browser.
 
+Contributing
+Fork it!
+Create your feature branch: git checkout -b my-new-feature
+Commit your changes: git commit -m "Add some feature"
+Push to the branch: git push origin my-new-feature
+Submit a pull request :)
+English is the universal language nowadays, so please don't create or comment on issues using another language.
+
 
